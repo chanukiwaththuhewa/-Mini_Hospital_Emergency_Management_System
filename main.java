@@ -1,22 +1,22 @@
-public class main {
+public class Main {
     public static void main(String[] args) {
-        EmergencyQueue queue = new EmergencyQueue();
+        TreatmentStack history = new TreatmentStack();
 
-        Patient p1 = new Patient(1, "Alice", 25, "1234", "Fever");
-        Patient p2 = new Patient(2, "Bob", 30, "5678", "Broken Arm");
+        // 1. Push completed treatments onto the stack
+        TreatmentRecord rec1 = new TreatmentRecord(101, "Alice", "Administered Paracetamol");
+        TreatmentRecord rec2 = new TreatmentRecord(102, "Bob", "Arm X-ray and Cast applied");
 
-        // Add them to the queue
-        queue.enqueue(p1);
-        queue.enqueue(p2);
+        history.push(rec1);
+        history.push(rec2);
 
-        // Show who is in line (Alice, then Bob)
-        queue.displayQueue();
+        // 2. Display records (Bob shows first because he finished last)
+        history.displayRecords();
 
-        // Call the first patient (Alice gets called first because she arrived first)
-        Patient called = queue.dequeue();
-        System.out.println("Doctor is now seeing: " + called.getName());
+        // 3. Pop the most recent record (Bob gets popped)
+        TreatmentRecord popped = history.pop();
+        System.out.println("Removed most recent: " + popped.getPatientName());
 
-        // Check who is left (Only Bob remains)
-        queue.displayQueue();
+        // 4. Display again (Only Alice remains)
+        history.displayRecords();
     }
 }
